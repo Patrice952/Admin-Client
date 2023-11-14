@@ -1,6 +1,5 @@
 #!/bin/bash
 
-# Fonction pour ajouter un utilisateur
 add_user() {
     read -p "Nom d'utilisateur: " username
     if [ -z "$username" ]; then
@@ -37,7 +36,7 @@ add_user() {
     fi
 }
 
-# Fonction pour modifier un utilisateur
+
 modify_user() {
     read -p "Nom d'utilisateur à modifier: " username
     if [ -z "$username" ]; then
@@ -45,7 +44,7 @@ modify_user() {
         return 1
     fi
 
-    # Vérifier si l'utilisateur existe
+
     if id "$username" &>/dev/null; then
         read -p "Nouveau nom d'utilisateur: " new_username
         read -p "Nouvelle date d'expiration (YYYY-MM-DD): " new_expiration_date
@@ -53,7 +52,7 @@ modify_user() {
         echo
         read -p "Nouvel identifiant (UID): " new_uid
 
-        # Modifier les informations de l'utilisateur
+        
         if sudo usermod -l "$new_username" -e "$new_expiration_date" -p "$(openssl passwd -6 $new_password)" -u "$new_uid" "$username"; then
             echo "Utilisateur $username modifié avec succès"
         else
@@ -65,15 +64,14 @@ modify_user() {
     fi
 }
 
-# Fonction pour supprimer un utilisateur
+
 delete_user() {
     read -p "Nom d'utilisateur à supprimer: " username
     if [ -z "$username" ]; then
         echo "Erreur: Nom d'utilisateur vide"
         return 1
     fi
-
-    # Vérifier si l'utilisateur existe
+    
     if id "$username" &>/dev/null; then
         read -p "Supprimer le dossier utilisateur? (oui/non): " delete_home
         if [ "$delete_home" == "oui" ]; then
@@ -95,7 +93,7 @@ delete_user() {
     fi
 }
 
-# Fonction pour gérer les droits sudoers
+
 manage_sudo() {
     read -p "Nom d'utilisateur à ajouter/supprimer des sudoers: " username
     if [ -z "$username" ]; then
@@ -130,7 +128,7 @@ manage_sudo() {
     fi
 }
 
-# Fonction pour le menu principal
+
 main_menu() {
     while true; do
         echo "Menu Principal"
@@ -152,5 +150,5 @@ main_menu() {
     done
 }
 
-# Menu principal
+
 main_menu
