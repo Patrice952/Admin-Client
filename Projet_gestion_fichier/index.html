@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Téléchargement et Gestion de Fichiers</title>
+</head>
+<body>
+    <h1>Interface de Téléchargement et Gestion de Fichiers</h1>
+
+    <!-- Formulaire pour télécharger des fichiers -->
+    <form action="upload.php" method="post" enctype="multipart/form-data">
+        <label for="file">Sélectionner un fichier :</label>
+        <input type="file" name="file" id="file" required>
+        <br>
+        <input type="submit" value="Télécharger">
+    </form>
+
+    <!-- Liste des fichiers téléchargés -->
+  
+    <?php include 'file-list.php'; ?>
+</body>
+</html>
